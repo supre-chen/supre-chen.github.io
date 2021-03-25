@@ -6,14 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Category: 生活 | Supre Chen</title>
+  <title>流水线问题 | Supre Chen</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Supre Chen">
-<meta property="og:url" content="http://example.com/categories/%E7%94%9F%E6%B4%BB/index.html">
+  <meta name="description" content="流水线问题​        某企业拥有4条流水生产线A、B、C、D，每条流水线目前每月的生产量在10、7、 5、4吨。现企业需要优化各流水线，故实行每月末从生产最多的流水线中抽出3吨 的生产力，分配到剩余的3条流水线里，既其余每条流水线多生产1吨，这称为一次 生产力优化(既经过第一个月后的优化，各流水线生产吨数在:7、8、6、5)那么请问，经过五年的生产力优化调整后，哪个流水线生产力最高，可每月生">
+<meta property="og:type" content="article">
+<meta property="og:title" content="流水线问题">
+<meta property="og:url" content="http://example.com/2021/03/26/%E6%B5%81%E6%B0%B4%E7%BA%BF%E9%97%AE%E9%A2%98/index.html">
 <meta property="og:site_name" content="Supre Chen">
+<meta property="og:description" content="流水线问题​        某企业拥有4条流水生产线A、B、C、D，每条流水线目前每月的生产量在10、7、 5、4吨。现企业需要优化各流水线，故实行每月末从生产最多的流水线中抽出3吨 的生产力，分配到剩余的3条流水线里，既其余每条流水线多生产1吨，这称为一次 生产力优化(既经过第一个月后的优化，各流水线生产吨数在:7、8、6、5)那么请问，经过五年的生产力优化调整后，哪个流水线生产力最高，可每月生">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-03-25T16:13:47.000Z">
+<meta property="article:modified_time" content="2021-03-25T16:34:30.439Z">
 <meta property="article:author" content="Supre Chen">
+<meta property="article:tag" content="算法题">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Supre Chen" type="application/atom+xml">
@@ -150,128 +155,200 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-流水线问题" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/03/25/X%E7%9A%84%E6%82%B2%E5%89%A7/" class="archive-article-date">
-  	<time datetime="2021-03-25T12:03:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-25</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/03/25/X%E7%9A%84%E6%82%B2%E5%89%A7/">X的悲剧</a>
+    <h1 class="article-title" itemprop="name">
+      流水线问题
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2021/03/26/%E6%B5%81%E6%B0%B4%E7%BA%BF%E9%97%AE%E9%A2%98/" class="archive-article-date">
+  	<time datetime="2021-03-25T16:13:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="流水线问题"><a href="#流水线问题" class="headerlink" title="流水线问题"></a>流水线问题</h2><p>​        某企业拥有4条流水生产线A、B、C、D，每条流水线目前每月的生产量在10、7、 5、4吨。现企业需要优化各流水线，故实行每月末从生产最多的流水线中抽出3吨 的生产力，分配到剩余的3条流水线里，既其余每条流水线多生产1吨，这称为一次 生产力优化(既经过第一个月后的优化，各流水线生产吨数在:7、8、6、5)<br>那么请问，经过五年的生产力优化调整后，哪个流水线生产力最高，可每月生产多少吨？<br>编程求解该问题，并思考是否为最优解。</p>
+<hr>
+<span id="more"></span>
+
+<p>思路如下：</p>
+<p>​        4条流水线对应A,B,C,D,刚好用数组的0,1,2,3代替，其实质对数组进行5次操作，每次操作找到数组的最大值，将其减3，其余元素则对应加1；最后输出该数组的索引和该索引下的值即可。由于解法是纯粹的数组的操作，所以使用的空间和时间会稍微复杂一点，应该不是最优解；如果想寻求快速且利用空间更少，可以使用hashmap，在比较时不用再创建数组，可以节约时间和空间。</p>
+<hr>
+<p>代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Answer1</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span>[] lines = &#123;<span class="number">10</span>, <span class="number">7</span>, <span class="number">5</span>, <span class="number">4</span>&#125;;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; <span class="number">5</span>;i ++) &#123;</span><br><span class="line">			optimize(lines);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">int</span>[] ans = getMax(lines);</span><br><span class="line">		System.out.println(<span class="string">&quot;流水线&quot;</span> + (<span class="keyword">char</span>)(ans[<span class="number">1</span>] + <span class="number">65</span>) + <span class="string">&quot;生产力最高 &quot;</span> + <span class="string">&quot;可每月生产&quot;</span> + ans[<span class="number">0</span>] + <span class="string">&quot;吨&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//此函数是优化函数，将最大的元素减3，其余的各自加1即可</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span>[] optimize(<span class="keyword">int</span>[] arr) &#123;</span><br><span class="line">		<span class="keyword">int</span>[] arrnew = getMax(arr);              <span class="comment">//得到当前数组最大的元素和对应索引</span></span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; arr.length;i ++) &#123;     <span class="comment">//遍历数组</span></span><br><span class="line">			<span class="keyword">if</span>(i == arrnew[<span class="number">1</span>]) &#123;                 <span class="comment">//最大的元素减3</span></span><br><span class="line">				arr[i] = arr[i] - <span class="number">3</span>;</span><br><span class="line">			&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">			arr[i] = arr[i] + <span class="number">1</span>;                 <span class="comment">//其余的元素加1</span></span><br><span class="line">		    &#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> arr;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//得到该数组的最大值和最大值对应的索引</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span>[] getMax(<span class="keyword">int</span>[] arr) &#123;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 这里是以防传进来的数组为空或者长度为0时的边界条件，由于传进来的数组必不为空，所以忽略；</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">//		if(arr == null || arr.length == 0) &#123;</span></span><br><span class="line"><span class="comment">//			return null;</span></span><br><span class="line"><span class="comment">//		&#125;</span></span><br><span class="line">		<span class="keyword">int</span> maxIndex = <span class="number">0</span>;                      <span class="comment">//假设第一个元素是最大值,所以索引设为0</span></span><br><span class="line">		<span class="keyword">int</span>[] newarr = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">2</span>];             <span class="comment">//用作记录最小值和对应的索引</span></span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt;arr.length - <span class="number">1</span>;i ++) &#123;</span><br><span class="line">			<span class="keyword">if</span>(arr[maxIndex] &lt; arr[i + <span class="number">1</span>]) &#123;</span><br><span class="line">				maxIndex = i + <span class="number">1</span>;              <span class="comment">//将索引变成较大值的索引</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		newarr[<span class="number">0</span>] = arr[maxIndex];</span><br><span class="line">		newarr[<span class="number">1</span>] = maxIndex;</span><br><span class="line">		<span class="keyword">return</span> newarr;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">算法题</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/生活//" class="article-tag-list-link color3">生活</a>
+        			<a href="/categories/算法//" class="article-tag-list-link color3">算法</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="/categories/生活/随笔//" class="article-tag-list-link color3">随笔</a>
+        			<a href="/categories/算法/算法题//" class="article-tag-list-link color4">算法题</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2021/03/26/%E6%B5%81%E6%B0%B4%E7%BA%BF%E9%97%AE%E9%A2%98/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/03/22/%E5%8D%A0%E6%98%9F%E6%9C%AF%E6%9D%80%E4%BA%BA%E9%AD%94%E6%B3%95/" class="archive-article-date">
-  	<time datetime="2021-03-22T13:22:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-22</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2021/03/26/%E5%AF%BB%E6%89%BE%E7%9B%B8%E9%82%BB%E6%9C%80%E5%A4%A7%E5%85%83%E7%B4%A0/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          寻找相邻最大元素
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/03/25/X%E7%9A%84%E6%82%B2%E5%89%A7/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">X的悲剧</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/03/22/%E5%8D%A0%E6%98%9F%E6%9C%AF%E6%9D%80%E4%BA%BA%E9%AD%94%E6%B3%95/">占星术杀人魔法</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/生活//" class="article-tag-list-link color3">生活</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/生活/随笔//" class="article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
+        
+        
+    </div>
+</aside>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+
   
   
-    </div></section>
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -294,10 +371,10 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
-		isCategory: true,
+		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
 		root: "/",
