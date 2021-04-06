@@ -6,14 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Archives: 2021/3 | Supre Chen</title>
+  <title>反转链表 | Supre Chen</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Supre Chen">
-<meta property="og:url" content="http://example.com/archives/2021/03/index.html">
+  <meta name="description" content="反转链表​        链表反转是每一个接触到数据结构链表的人都必须掌握的知识，因为方法比较讨巧，对于初学者来说是比较容易绕进去，因此，特地记录一下当初学链表反转的思路。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="反转链表">
+<meta property="og:url" content="http://example.com/2021/04/06/%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8/index.html">
 <meta property="og:site_name" content="Supre Chen">
+<meta property="og:description" content="反转链表​        链表反转是每一个接触到数据结构链表的人都必须掌握的知识，因为方法比较讨巧，对于初学者来说是比较容易绕进去，因此，特地记录一下当初学链表反转的思路。">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-04-06T13:16:48.000Z">
+<meta property="article:modified_time" content="2021-04-06T13:20:14.742Z">
 <meta property="article:author" content="Supre Chen">
+<meta property="article:tag" content="链表">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Supre Chen" type="application/atom+xml">
@@ -150,48 +155,83 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-反转链表" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/03/28/%E7%AE%80%E5%8D%95%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" class="archive-article-date">
-  	<time datetime="2021-03-27T16:09:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-28</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/03/28/%E7%AE%80%E5%8D%95%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/">简单排序算法</a>
+    <h1 class="article-title" itemprop="name">
+      反转链表
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2021/04/06/%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8/" class="archive-article-date">
+  	<time datetime="2021-04-06T13:16:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="反转链表"><a href="#反转链表" class="headerlink" title="反转链表"></a>反转链表</h2><p>​        链表反转是每一个接触到数据结构链表的人都必须掌握的知识，因为方法比较讨巧，对于初学者来说是比较容易绕进去，因此，特地记录一下当初学链表反转的思路。</p>
+<span id="more"></span>
+
+<p><strong>1.1定义结点</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> calss Node&lt;T&gt; &#123;</span><br><span class="line">    <span class="comment">//存储元素</span></span><br><span class="line">	<span class="keyword">public</span> T item;</span><br><span class="line">    <span class="comment">//指向下一个结点</span></span><br><span class="line">    <span class="keyword">public</span> Node next;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Node</span><span class="params">(T item, Node next)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.item = item;</span><br><span class="line">        <span class="keyword">this</span>.next = next;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>1.2反转思路：</strong></p>
+<ol>
+<li>调用reverse(Node cur)方法反转每一个结点，从元素1结点开始；</li>
+<li>如果发现cur还有下一个结点，则递归调用reverse(cur.next)对下一个结点进行反转；</li>
+<li>最终递归的出口是最后一个结点，因为他没有下一个元素了，当到了出口处，让head指向最后一个元素结点；</li>
+<li>最后递归返回。</li>
+</ol>
+<p><strong>代码如下：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">reverse</span><span class="params">(Node Cur)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(cur.next == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;   </span><br><span class="line">    Node pre = reverse(cur.next);</span><br><span class="line">    pre.next = cur;  <span class="comment">//pre是原链表中cur的下一个结点</span></span><br><span class="line">    cur.next = <span class="keyword">null</span>; <span class="comment">//cur是返回的结点</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">排序算法</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">链表</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -201,316 +241,111 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="/categories/数据结构/排序算法//" class="article-tag-list-link color5">排序算法</a>
+        			<a href="/categories/数据结构/链表//" class="article-tag-list-link color3">链表</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2021/04/06/%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/03/26/%E6%9C%80%E9%95%BF12%E7%9B%B8%E9%97%B4%E5%AD%90%E4%B8%B2/" class="archive-article-date">
-  	<time datetime="2021-03-25T16:14:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-26</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2021/04/06/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">快速排序</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/03/26/%E6%9C%80%E9%95%BF12%E7%9B%B8%E9%97%B4%E5%AD%90%E4%B8%B2/">最长12相间子串</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">算法题</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/算法//" class="article-tag-list-link color3">算法</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/算法/算法题//" class="article-tag-list-link color4">算法题</a>
-        		</li>
-      		
-		</ul>
-	</div>
+        
+        
+    </div>
+</aside>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/03/26/%E5%AF%BB%E6%89%BE%E7%9B%B8%E9%82%BB%E6%9C%80%E5%A4%A7%E5%85%83%E7%B4%A0/" class="archive-article-date">
-  	<time datetime="2021-03-25T16:14:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-26</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/03/26/%E5%AF%BB%E6%89%BE%E7%9B%B8%E9%82%BB%E6%9C%80%E5%A4%A7%E5%85%83%E7%B4%A0/">寻找相邻最大元素</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">算法题</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/算法//" class="article-tag-list-link color3">算法</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/算法/算法题//" class="article-tag-list-link color4">算法题</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/03/26/%E6%B5%81%E6%B0%B4%E7%BA%BF%E9%97%AE%E9%A2%98/" class="archive-article-date">
-  	<time datetime="2021-03-25T16:13:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-26</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/03/26/%E6%B5%81%E6%B0%B4%E7%BA%BF%E9%97%AE%E9%A2%98/">流水线问题</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">算法题</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/算法//" class="article-tag-list-link color3">算法</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/算法/算法题//" class="article-tag-list-link color4">算法题</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/03/25/X%E7%9A%84%E6%82%B2%E5%89%A7/" class="archive-article-date">
-  	<time datetime="2021-03-25T12:03:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-25</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/03/25/X%E7%9A%84%E6%82%B2%E5%89%A7/">X的悲剧</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/生活//" class="article-tag-list-link color3">生活</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/生活/随笔//" class="article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/03/22/%E5%8D%A0%E6%98%9F%E6%9C%AF%E6%9D%80%E4%BA%BA%E9%AD%94%E6%B3%95/" class="archive-article-date">
-  	<time datetime="2021-03-22T13:22:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-22</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/03/22/%E5%8D%A0%E6%98%9F%E6%9C%AF%E6%9D%80%E4%BA%BA%E9%AD%94%E6%B3%95/">占星术杀人魔法</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/生活//" class="article-tag-list-link color3">生活</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/生活/随笔//" class="article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/03/21/hello-world/" class="archive-article-date">
-  	<time datetime="2021-03-21T11:33:27.761Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/03/21/hello-world/">Hello World</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
   
-    </div></section>
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -533,8 +368,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
